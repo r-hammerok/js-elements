@@ -1,11 +1,11 @@
 'use strict';
 
-const DomElement = function(selector, height, width, bg, fontSize) {
-    this.selector = selector;
-    this.height = height;
-    this.width = width;
-    this.bg = bg;
-    this.fontSize = fontSize;
+const DomElement = function(selector = '.hey', height = '100px', width = '350px', bg = 'green', fontSize = '2em') {
+    this.selector = selector.trim();
+    this.height = height.trim();
+    this.width = width.trim();
+    this.bg = bg.trim();
+    this.fontSize = fontSize.trim();
 };
 
 DomElement.prototype.getStyle = function() {
