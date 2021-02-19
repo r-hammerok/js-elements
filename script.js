@@ -1,6 +1,6 @@
 'use strict';
 
-const DomElement = function(selector, height, width, bg, fontSize) {
+const DomElement = function(selector = '.hey', height = '100px', width = '350px', bg = 'green', fontSize = '2em') {
     this.selector = selector.trim();
     this.height = height.trim();
     this.width = width.trim();
