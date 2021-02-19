@@ -8,57 +8,30 @@ const DomElement = function(selector = '.hey', height = '100px', width = '350px'
     this.fontSize = fontSize.trim();
 };
 
-DomElement.prototype.getStyle = function() {
-    let cssInner = ``;
-    if (this.height !== undefined) {
-        cssInner += `height: ${this.height};`;
-    }
-    if (this.width !== undefined) {
-        cssInner += `width: ${this.width};`;
-    }
-    if (this.bg !== undefined) {
-        cssInner += `background-color: ${this.bg};`;
-    }
-    if (this.fontSize !== undefined) {
-        cssInner += `font-size: ${this.fontSize};`;
-    }
-    if (this.position !== undefined) {
-        cssInner += `position: ${this.position};`;
-    }
-    if (this.posX !== undefined) {
-        cssInner += `left: ${this.posX}px;`;
-    }
-    if (this.posY !== undefined) {
-        cssInner += `top: ${this.posY}px;`;
-    }
-
-    return cssInner;
-};
-
 DomElement.prototype.addElement = function() {
-    let 
-        element = '',
-        value = this.selector.slice(1);
-    if (this.selector[0] === '.') {
-        if (document.querySelector(`div.${value}`)) {
-            element = document.querySelector(`div.${value}`);
-        } else {
-            element = document.createElement('div');
-        }
-        element.className = this.selector.slice(1);
-        element.innerText = `Это блок <DIV> с классом ${this.selector.slice(1)}`;
-    }
-    if (this.selector[0] === '#') {
-        if (document.querySelector(`p#${value}`)) {
-            element = document.querySelector(`p#${value}`);
-        } else {
-            element = document.createElement('p');
-        }
-        element.id = this.selector.slice(1);
-        element.innerText = `Это блок <P> с ID ${this.selector.slice(1)}`;
-    }
+    const tag = this.selector[0] === '.' ? 'div' : 'p';
     
-    element.style.cssText = this.getStyle();
+    let element = document.querySelector(this.selector) ?  
+                document.querySelector(this.selector) : document.createElement(tag);
+
+    if (tag === 'div') {
+        element.className = this.selector.slice(1);
+    } else {
+        element.id = this.selector.slice(1);
+    }
+    element.innerText = 'Lorem Ipsum';
+    
+    let css = 
+        `height: ${this.height}; 
+        width: ${this.width};
+        background-color: ${this.bg};
+        font-size: ${this.fontSize}; 
+        position: ${this.position ? this.position : 'initial'};
+        `;
+        css += this.posX !== undefined ? `left: ${this.posX}px;` : '';
+        css += this.posY !== undefined ? `top: ${this.posY}px;` : '';
+
+    element.style.cssText = css;
     document.body.append(element);
 };
 
