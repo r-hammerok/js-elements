@@ -6,6 +6,9 @@ const DomElement = function(selector = '.hey', height = '100px', width = '350px'
     this.width = width.trim();
     this.bg = bg.trim();
     this.fontSize = fontSize.trim();
+    this.position = 'block';
+    this.posX = 0;
+    this.posY = 0;
 };
 
 DomElement.prototype.addElement = function() {
@@ -26,10 +29,10 @@ DomElement.prototype.addElement = function() {
         width: ${this.width};
         background-color: ${this.bg};
         font-size: ${this.fontSize}; 
-        position: ${this.position ? this.position : 'initial'};
+        position: ${this.position};
+        left: ${this.posX}px;
+        top: ${this.posY}px;
         `;
-        css += this.posX !== undefined ? `left: ${this.posX}px;` : '';
-        css += this.posY !== undefined ? `top: ${this.posY}px;` : '';
 
     element.style.cssText = css;
     document.body.append(element);
